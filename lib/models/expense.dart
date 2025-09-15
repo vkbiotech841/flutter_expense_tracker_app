@@ -35,6 +35,32 @@ class Expense {
   }
 }
 
+class ExpenseBucket {
+  // Basic or default constructor function
+  const ExpenseBucket({
+    required this.category,
+    required this.expenses,
+  });
+
+  // Extra or additional constructor function
+  // Filtering
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+    : expenses = allExpenses
+          .where((expense) => expense.category == category)
+          .toList();
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses {
+    double sum = 0;
+    for (final expense in expenses) {
+      sum = sum + expense.amount;
+    }
+    return sum;
+  }
+}
+
 
 // Use pub.dev website for any external packages being used in the flutter project. 
 // Here, we are using uuid an external package to generate the id. 
